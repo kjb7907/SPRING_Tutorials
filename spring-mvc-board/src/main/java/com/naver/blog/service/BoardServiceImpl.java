@@ -13,6 +13,12 @@ public class BoardServiceImpl implements BoardService {
 	private BoardDao boardDao;
 	
 	@Override
+	public int removeBoard(Board board) {
+		System.out.println("Service RemoveBoard");
+		return boardDao.deleteBoard(board);
+	}
+	
+	@Override
 	public Board boardView(int boardNo) {
 		System.out.println("Service boardView");
 		return boardDao.selectBoardView(boardNo);
@@ -47,7 +53,6 @@ public class BoardServiceImpl implements BoardService {
 		returnMap.put("list", list);
 		return returnMap;
 	}
-
 
 
 }

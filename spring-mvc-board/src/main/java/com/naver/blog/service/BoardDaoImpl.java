@@ -14,6 +14,13 @@ public class BoardDaoImpl implements BoardDao {
 	private SqlSessionTemplate sqlSession;
 	
 	private final String BOARD_NS = "com.naver.blog.BoardMapper.";
+	
+	@Override
+	public int deleteBoard(Board board) {
+		System.out.println("dao deleteBoard");
+		System.out.println(board.getBoardNo()+" "+board.getBoardPw());
+		return sqlSession.delete(BOARD_NS+"deleteBoard", board);
+	}
 
 	@Override
 	public Board selectBoardView(int boardNo) {
@@ -39,7 +46,5 @@ public class BoardDaoImpl implements BoardDao {
 		System.out.println("selectListPerPage");
 		return sqlSession.selectList(BOARD_NS+"selectBoardListPerPage",map);
 	}
-
-
 
 }

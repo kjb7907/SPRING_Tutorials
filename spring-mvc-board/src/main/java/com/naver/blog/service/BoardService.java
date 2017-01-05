@@ -3,8 +3,10 @@ package com.naver.blog.service;
 import java.util.Map;
 
 public interface BoardService {
-		Board boardView(int boardNo);
-		public int addBoard(Board board);
-		Map<String, Object> getBoardListPerCurrentPage(int currentPage);
+		
+		int removeBoard(Board board); //삭제
+		Board boardView(int boardNo); // 뷰
+		int addBoard(Board board); //추가
+		Map<String, Object> getBoardListPerCurrentPage(int currentPage); //리스트
 	}
 

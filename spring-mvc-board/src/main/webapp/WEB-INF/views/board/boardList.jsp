@@ -12,6 +12,7 @@
     <table border="1">
         <thead>
             <tr>
+            	<th>boardNo</th>
                 <th>boardTitle</th>
                 <th>boardUser</th>
                 <th>boardDate</th>
@@ -20,6 +21,7 @@
         <tbody>
             <c:forEach var="b" items="${list}">
                 <tr>
+                	<td>${b.boardNo}</td>
                     <td><a href="<%=request.getContextPath()%>/board/boardView?boardNo=${b.boardNo}">${b.boardTitle}</a></td>
                     <td>${b.boardUser}</td>
                     <td>${b.boardDate}</td>
