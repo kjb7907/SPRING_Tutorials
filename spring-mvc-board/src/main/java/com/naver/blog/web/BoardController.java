@@ -32,10 +32,28 @@ public class BoardController {
 	}
 	
 	//수정화면
-	@RequestMapping(value = "/board/boardModify")
-	public String boardModify(){
+	@RequestMapping(value = "/board/boardModify", method = RequestMethod.GET)
+	public String boardModify(Model model,
+			@RequestParam(value = "boardNo") int boardNo){
+			Board board = boardService.boardView(boardNo);
+			System.out.println(board.toString());
+			model.addAttribute("board",board);
+		return "/board/boardModify";
+	}
+	//수정처리
+	@RequestMapping(value = "/board/boardModify", method = RequestMethod.POST)
+	public String boardModify(Board board){
 		
-		return "redirect:/board/boardView?boardNo=1";
+		System.out.println("controller boardModify POST");
+		System.out.println(board.toString());
+		
+		int result = boardService.modifyBoard(board);
+		System.out.println("결과:"+result);
+		if(result<1){
+			return "redirect:/board/boardModify?boardNo="+board.getBoardNo();
+		}else{
+			return "redirect:/board/boardView?boardNo="+board.getBoardNo();	
+		}
 	}
 	
 	//삭제화면
@@ -49,10 +67,13 @@ public class BoardController {
 	@RequestMapping(value = "/board/boardRemove", method = RequestMethod.POST)
 	public String boardRemove(Board board){
 		System.out.println(board.getBoardPw());
+		System.out.println(board.toString());
 		int result = boardService.removeBoard(board);
-
+		if(result<1){
+			return "redirect:/board/boardRemove?boardNo="+board.getBoardNo();
+		}else{
 			return "redirect:/board/boardList";	
-
+		}
 	}
 	//리스트
 	@RequestMapping(value="/board/boardList")

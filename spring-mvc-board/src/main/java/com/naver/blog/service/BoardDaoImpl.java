@@ -16,6 +16,12 @@ public class BoardDaoImpl implements BoardDao {
 	private final String BOARD_NS = "com.naver.blog.BoardMapper.";
 	
 	@Override
+	public int updateBoard(Board board) {
+		System.out.println("dao updateBoard");
+		return sqlSession.delete(BOARD_NS+"updateBoard",board);
+	}
+
+	@Override
 	public int deleteBoard(Board board) {
 		System.out.println("dao deleteBoard");
 		System.out.println(board.getBoardNo()+" "+board.getBoardPw());

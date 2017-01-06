@@ -5,6 +5,7 @@ import java.util.Map;
 
 public interface BoardDao {
 	
+	int updateBoard(Board board);
 	int deleteBoard(Board board);
 	Board selectBoardView(int boardNo);
 	int insertBoard(Board board);
