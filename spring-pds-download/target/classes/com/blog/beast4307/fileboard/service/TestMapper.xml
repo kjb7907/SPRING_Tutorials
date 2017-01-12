@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.blog.beast4307.TestMapper">
+  
+  <!--수정처리-->
+  <update id="updateFileBoard" parameterType="com.blog.beast4307.fileboard.service.FileBoard" >
+  	UPDATE 
+  		datarepository
+  	SET 
+  		title=#{title},
+  		auth=#{auth},
+  		fileName=#{fileName},
+  		filePath=#{filePath},
+  		extention=#{extention}
+  	WHERE no=#{no};
+  		
+  		
+  </update>
+  
+  <!--하나의 행 가져오기-->
+  <select id="selectOne" parameterType="int" resultType="com.blog.beast4307.fileboard.service.FileBoard">
+  	SELECT 
+  		*
+  	FROM
+  		datarepository 
+  	WHERE
+  		no=#{no}
+  </select>
+  <!--파일삭제-->
+  	<delete id ="deleteFileBoard" parameterType="com.blog.beast4307.fileboard.service.FileBoard">
+  	DELETE FROM 
+  		datarepository 
+  	WHERE 
+  		no=#{no}
+  	</delete>
+  <!--전체행 수-->
+  	<select id="selectTotalBoardCount" resultType="int">
+		SELECT 
+			COUNT(*) 
+		FROM
+			datarepository 
+	</select> 
+	
+  <!--파일리스트-->
+  <select id="selectFileBoardListPerPage" parameterType="Map" resultType="com.blog.beast4307.fileboard.service.FileBoard">
+		SELECT 
+			no,
+			title,
+			auth,
+			fileName,
+			extention,
+			filePath
+		FROM 
+			datarepository
+		ORDER BY no DESC 
+		LIMIT #{beginRow}, #{pagePerRow}
+	</select>
+
+	<!--파일상세보기-->
+  	<!--
+  	<select id="selectBoardByKey" parameterType="int" resultType="com.blog.beast4307.fileboard.service.FileBoard">
+		SELECT 
+			board_no AS boardNo,
+			board_title AS boardTitle,
+			board_content AS boardContent,
+			board_user AS boardUser,
+			board_date AS boardDate
+		FROM board 
+		WHERE board_no=#{boardNo}
+	</select>
+    -->
+    
+  <!--파일등록-->
+  <insert id="dataInsert" parameterType="com.blog.beast4307.fileboard.service.FileBoard">
+  	INSERT INTO datarepository(
+  		title,
+  		auth,
+  		fileName,
+  		filePath,
+  		extention
+  	) VALUES (
+  		#{title},
+  		#{auth},
+  		#{fileName},
+  		#{filePath},
+  		#{extention}
+  		)
+  	
+  </insert>
+  
+ </mapper>
